@@ -39,18 +39,32 @@ if 'current_q_index' not in st.session_state:
 with st.sidebar:
     st.title("⚙️ Configuration")
     
-    # Auto-load key from environment
-    default_api_key = os.getenv("OPENAI_API_KEY", "")
+    # Try to load key from environment or secrets
+    env_key = os.getenv("OPENAI_API_KEY") or st.secrets.get("OPENAI_API_KEY")
     
-    api_key_input = st.text_input("OpenAI API Key (Optional)", value=default_api_key, type="password", help="Leave empty to use Demo Mode (Simulated AI).")
-    
-    if api_key_input != st.session_state.get('api_key', ''):
-        st.session_state.api_key = api_key_input
-        # Re-init engine if key changes
-        st.session_state.llm_engine = LLMEngine(api_key=api_key_input)
+    if env_key:
+        # Key is present in backend
+        st.success("✅ OpenAI API Key loaded from environment.")
+        st.session_state.api_key = env_key
+        
+        # Optional override
+        with st.expander("Override API Key"):
+            override_key = st.text_input("New API Key", type="password", help="Enter a new key to override the system key.")
+            if override_key:
+                st.session_state.api_key = override_key
+    else:
+        # Key not in backend, ask user
+        api_key_input = st.text_input("OpenAI API Key (Optional)", type="password", help="Leave empty to use Demo Mode (Simulated AI).")
+        if api_key_input:
+            st.session_state.api_key = api_key_input
+
+    # Initialize Engine
+    if st.session_state.get('api_key') != st.session_state.get('last_api_key'):
+        st.session_state.llm_engine = LLMEngine(api_key=st.session_state.get('api_key'))
+        st.session_state.last_api_key = st.session_state.get('api_key')
     
     if st.session_state.llm_engine is None:
-        st.session_state.llm_engine = LLMEngine(api_key=api_key_input if 'api_key' in st.session_state else None)
+        st.session_state.llm_engine = LLMEngine(api_key=st.session_state.get('api_key'))
         
     st.info("💡 **Tip**: In Demo Mode, the AI mimics responses without external API calls.")
     

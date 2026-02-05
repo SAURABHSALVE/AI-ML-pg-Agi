@@ -1,0 +1,101 @@
+/* Main App Styling */
+.stApp {
+    background: radial-gradient(circle at 10% 20%, rgb(17, 24, 39) 0%, rgb(0, 0, 0) 90%);
+    color: #e2e8f0;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Sidebar Styling */
+[data-testid="stSidebar"] {
+    background-color: #0f172a;
+    border-right: 1px solid #334155;
+}
+
+/* Headers */
+h1,
+h2,
+h3 {
+    color: #f8fafc !important;
+    font-weight: 700 !important;
+}
+
+h1 {
+    background: linear-gradient(to right, #60a5fa, #a855f7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding-bottom: 20px;
+}
+
+/* Inputs */
+.stTextInput>div>div>input,
+.stTextArea>div>div>textarea,
+.stSelectbox>div>div>div,
+.stNumberInput>div>div>input {
+    background-color: rgba(30, 41, 59, 0.7);
+    color: #f8fafc;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.stTextInput>div>div>input:focus,
+.stTextArea>div>div>textarea:focus {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+}
+
+.stTextInput>div>div>input:focus {
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2);
+}
+
+/* Buttons */
+.stButton>button {
+    background: linear-gradient(to right, #3b82f6, #8b5cf6);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.stButton>button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5);
+}
+
+/* Chat Messages */
+/* Chat Messages */
+.user-message {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    padding: 1rem 1.5rem;
+    border-radius: 18px 18px 4px 18px;
+    margin: 15px 0;
+    color: #fff;
+    text-align: right;
+    margin-left: auto;
+    max-width: 75%;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bot-message {
+    background-color: rgba(30, 41, 59, 0.9);
+    border: 1px solid #475569;
+    padding: 1rem 1.5rem;
+    border-radius: 18px 18px 18px 4px;
+    margin: 15px 0;
+    color: #e2e8f0;
+    max-width: 75%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Cards/Containers */
+div[data-testid="stExpander"] {
+    background-color: #1e293b;
+    border-radius: 8px;
+    border: 1px solid #334155;
+}
